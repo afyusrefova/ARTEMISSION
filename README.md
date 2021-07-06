@@ -11,14 +11,14 @@ We are developing a program, which will help people to adopt dogs.
 
 ## <img src="https://o.remove.bg/downloads/3fcf90c9-dc2c-4a0b-9fce-93276ec6a2e9/Bullet_orange_paw-removebg-preview.png" width="40">  Installation 
 
-Download the game from [github] https://github.com/afyusrefova/ARTEMISsion by pressing the green clone button. 
+Download the application from [github] https://github.com/afyusrefova/ARTEMISsion by pressing the green clone button. 
 
 ---
 
 ## <img src="https://o.remove.bg/downloads/3fcf90c9-dc2c-4a0b-9fce-93276ec6a2e9/Bullet_orange_paw-removebg-preview.png" width="40"> Project developers
 - Emily Kehayova *email* edkehayova18@codingburgas.bg
 
-- Afra Usrefova *email* afyusrefova18@codingburgas.bg
+- Afra Yusrefova *email* afyusrefova18@codingburgas.bg
 
 ---
 
