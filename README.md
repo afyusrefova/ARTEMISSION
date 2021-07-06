@@ -1,4 +1,4 @@
-<img src="file:///C:/Users/EDKehayova18/Pictures/FINAL_LOGO_3-%20background%20removed.png" width="200">
+<img src="https://o.remove.bg/downloads/7053ad3e-754b-471a-9323-9502ff7c7b35/FINAL_LOGO_3-removebg-preview.png" width="200">
 
 ## Hi, we are Team ARTEMISSION!
 
