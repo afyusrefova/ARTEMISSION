@@ -26,7 +26,7 @@ Download the game from [github] *link* by pressing the green clone button.
 -  <img src="https://media.discordapp.net/attachments/815253581149896790/818133539903111188/Microsoft_Word_logo.png" width="20"> Word
 - <img src="https://media.discordapp.net/attachments/815253581149896790/818136011359518780/kisspng-microsoft-powerpoint-computer-software-microsoft-o-5b3b3927c75c49.3318087715306079118166-rem.png" width="20"> PowerPoint
 - <img src="https://media.discordapp.net/attachments/815253581149896790/818130499204939866/788px-Adobe_Photoshop_CC_icon.svg.png?width=555&height=541" width="20"> Photoshop
-- MSSQL
+- <img src="https://o.remove.bg/downloads/5f81ebb3-9041-4434-9f77-6753f52a5e0d/microsoft-sql-server_logo-removebg-preview.png" width="20"> MSSQL
 
  For programming language we used C++
  
