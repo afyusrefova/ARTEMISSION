@@ -11,13 +11,14 @@ We are developing a program, which will help people to adopt dogs.
 
 ## <img src="https://o.remove.bg/downloads/3fcf90c9-dc2c-4a0b-9fce-93276ec6a2e9/Bullet_orange_paw-removebg-preview.png" width="40">  Installation 
 
-Download the game from [github] *link* by pressing the green clone button. 
+Download the game from [github] https://github.com/afyusrefova/ARTEMISsion by pressing the green clone button. 
 
 ---
 
 ## <img src="https://o.remove.bg/downloads/3fcf90c9-dc2c-4a0b-9fce-93276ec6a2e9/Bullet_orange_paw-removebg-preview.png" width="40"> Project developers
-- Emily Kehayova 
-- Afra Usrefova
+- Emily Kehayova *email* edkehayova18@codingburgas.bg
+
+- Afra Usrefova *email* afyusrefova18@codingburgas.bg
 
 ---
 
@@ -28,6 +29,6 @@ Download the game from [github] *link* by pressing the green clone button.
 - <img src="https://media.discordapp.net/attachments/815253581149896790/818130499204939866/788px-Adobe_Photoshop_CC_icon.svg.png?width=555&height=541" width="20"> Photoshop
 - <img src="https://o.remove.bg/downloads/5f81ebb3-9041-4434-9f77-6753f52a5e0d/microsoft-sql-server_logo-removebg-preview.png" width="20"> MSSQL
 
- For programming language we used C++
+ The program is created using C++
  
  ---
