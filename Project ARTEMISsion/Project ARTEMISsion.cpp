@@ -1,8 +1,7 @@
-
-
 #include <iostream>
 #include <string>
 using namespace std;
+
 enum gender {
     MALE, FEMALE
 };
@@ -29,6 +28,8 @@ struct DOG
     DATE dateOfArrival;
     DATE dateOfAdoption;
 };
+
+
 string genderEnumToString(DOG* dogs, int i)
 {
     string gender;
@@ -58,6 +59,66 @@ string conditionEnumToString(DOG* dogs, int i)
     return condition;
 }
 
+void genderStringToEnum(DOG* dogs, string gender, int i)
+{
+    if (gender == "male")
+    {
+        dogs[i].gender = gender::MALE;
+
+    }
+    else if (gender == "female")
+    {
+        dogs[i].gender = gender::FEMALE;
+    }
+}
+
+void conditionStringToEnum(DOG* dogs, string condition, int i)
+{
+    if (condition == "good")
+    {
+        dogs[i].condition = condition::GOOD;
+
+    }
+    else if (condition == "bad")
+    {
+        dogs[i].condition = condition::BAD;
+    }
+}
+
+void addDog(DOG* dogs, int& dogCount, DOG newDog)
+{
+    dogs[dogCount] = newDog;
+    dogs[dogCount].id = dogCount + 1;
+    dogCount++;
+}
+
+void addDogMenu(DOG* dogs, int& dogCount)
+{
+    string gender, condition;
+
+    DOG newDog;
+    cout << "Fill in the information about the dog" << endl;
+    cout << endl;
+    cout << "Name: ";
+    cin >> newDog.name;
+    cout << "Breed: ";
+    cin >> newDog.breed;
+    cin.ignore();
+    cout << "Age (Years): ";
+    cin >> newDog.age;
+    cout << "Gender (male/female): ";
+    cin >> gender;
+    cout << "Condition (good/bad): ";
+    cin >> condition;
+    cout << "Date of arrival (D/M/Y): ";
+    cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
+
+    addDog(dogs, dogCount, newDog);
+
+    genderStringToEnum(dogs, gender, (dogCount - 1));
+    conditionStringToEnum(dogs, condition, (dogCount - 1));
+}
+
 void showDog(DOG* dogs, int i, string gender, string condition)
 {
     cout << "Name: " << dogs[i].name << endl;
@@ -69,7 +130,7 @@ void showDog(DOG* dogs, int i, string gender, string condition)
     cout << "Date of arrival: " << dogs[i].dateOfArrival.day << "/" << dogs[i].dateOfArrival.month << "/" << dogs[i].dateOfArrival.year << endl;
 }
 
-void showAdoptedDog(DOG* adoptedDogs, int i, string gender, string condition)
+void printAdoptedDogs(DOG* adoptedDogs, int i, string gender, string condition)
 {
     cout << "Name: " << adoptedDogs[i].name << endl;
     cout << "ID: " << adoptedDogs[i].id << endl;
@@ -81,15 +142,15 @@ void showAdoptedDog(DOG* adoptedDogs, int i, string gender, string condition)
     cout << "Date of adoption: " << adoptedDogs[i].dateOfAdoption.day << "/" << adoptedDogs[i].dateOfAdoption.month << "/" << adoptedDogs[i].dateOfAdoption.year << endl;
 }
 
-void showDogsInShelter(DOG* Dogs, int DogCount)
+void showDogsInShelter(DOG* dogs, int dogCount)
 {
     string gender, condition;
 
-    for (int i = 0; i < DogCount; i++)
+    for (int i = 0; i < dogCount; i++)
     {
-        gender = genderEnumToString(Dogs, i);
-        condition = conditionEnumToString(Dogs, i);
-        showDog(Dogs, i, gender, condition);
+        gender = genderEnumToString(dogs, i);
+        condition = conditionEnumToString(dogs, i);
+        showDog(dogs, i, gender, condition);
         cout << endl;
     }
     cout << endl;
@@ -104,36 +165,35 @@ void showAdoptedDogs(DOG* adoptedDogs, int adoptedDogCount)
     {
         gender = genderEnumToString(adoptedDogs, i);
         condition = conditionEnumToString(adoptedDogs, i);
-        showAdoptedDog(adoptedDogs, i, gender, condition);
+        printAdoptedDogs(adoptedDogs, i, gender, condition);
     }
     cout << endl;
 }
 
-void showByBreed(DOG* Dogs, int DogCount, string breedUser)
+void showByBreed(DOG* dogs, int dogCount, string breedUser)
 {
     string gender, condition;
 
-    for (int i = 0; i < DogCount; i++)
+    for (int i = 0; i < dogCount; i++)
     {
-        gender = genderEnumToString(Dogs, i);
-        condition = conditionEnumToString(Dogs, i);
-        if (Dogs[i].breed == breedUser)
+        gender = genderEnumToString(dogs, i);
+        condition = conditionEnumToString(dogs, i);
+        if (dogs[i].breed == breedUser)
         {
-            showDog(Dogs, i, gender, condition);
+            showDog(dogs, i, gender, condition);
         }
     }
     cout << endl;
 }
 
-void showByBreedMenu(DOG* Dogs, int DogCount)
+void showByBreedMenu(DOG* dogs, int dogCount)
 {
     string breedUser;
     cout << "Enter breed: ";
     cin >> breedUser;
     cout << endl;
-    showByBreed(Dogs, DogCount, breedUser);
+    showByBreed(dogs, dogCount, breedUser);
 }
-
 
 void showById(DOG* dogs, int dogCount, int IdUser)
 {
@@ -177,7 +237,7 @@ void showBadConditionDogs(DOG* dogs, int dogCount)
     cout << endl;
 }
 
-void mainMenu(DOG* dogs, int dogCount, DOG* adoptedDogs, int adoptedDogCount)
+void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
 {
     int choice;
 
@@ -204,7 +264,8 @@ void mainMenu(DOG* dogs, int dogCount, DOG* adoptedDogs, int adoptedDogCount)
 
     switch (choice)
     {
-        /*case 1:addDog(); break;
+    case 1:addDogMenu(dogs, dogCount); break;
+        /*
         case 2:insertDog(); break;
         case 3:removeDog(); break;
         case 4:updateDog(); break;*/
@@ -217,9 +278,9 @@ void mainMenu(DOG* dogs, int dogCount, DOG* adoptedDogs, int adoptedDogCount)
     }
 }
 
-
 int main()
 {
+    bool continueMenu = true;
     int dogCount = 5;
     int adoptedDogCount = 1;
 
@@ -235,8 +296,11 @@ int main()
         {"Sara", 13, "Golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}}
     };
 
-    cout << "Hello! We are team ARTEMISSION and welcome to our program! \nHow may we assist you todat?" << endl;
+    cout << "Hello! We are team ARTEMISSION and welcome to our program! \nHow may we assist you today?" << endl;
+
+    do {
+        mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount);
+    } while (continueMenu == true);
 
 
-    mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount);
 }
