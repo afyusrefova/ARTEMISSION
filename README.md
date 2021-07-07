@@ -9,7 +9,7 @@ We are developing a program, which will help people to adopt dogs.
 ---
  
 
-## <img src="https://o.remove.bg/downloads/3fcf90c9-dc2c-4a0b-9fce-93276ec6a2e9/Bullet_orange_paw-removebg-preview.png" width="40">  Installation 
+## <img src="Images/FINAL_LOGO_3.png" width="40">  Installation 
 
 Download the program from [github] https://github.com/afyusrefova/ARTEMISsion by pressing the green clone button. 
 
