@@ -156,6 +156,65 @@ void insertDogMenu(DOG* dogs, int& dogCount)
       */
 }
 
+int getIndexById(DOG* dogs, int dogCount, int idUser)
+{
+    int index;
+    for (int i = 0; i < dogCount; i++)
+    {
+        if (dogs[i].id == idUser)
+            index = i;
+    }
+
+    return index;
+}
+
+void removeDog(DOG* dogs, int& dogCount, int index)
+{
+    for (int i = index; i < (dogCount - 1); i++)
+    {
+        dogs[i] = dogs[i + 1];
+    }
+    dogCount--;
+}
+
+void removeDogByIdMenu(DOG* dogs, int& dogCount)
+{
+    int id, index;
+    cout << "Enter dog's ID: ";
+    cin >> id;
+
+    index = getIndexById(dogs, dogCount, id);
+    removeDog(dogs, dogCount, index);
+}
+
+void removeDogByIndexMenu(DOG* dogs, int& dogCount)
+{
+    int index;
+    cout << "Enter dog's position (index): ";
+    cin >> index;
+
+    removeDog(dogs, dogCount, index);
+}
+
+void removeDogMenu(DOG* dogs, int& dogCount)
+{
+    int choice;
+    cout << "Do you want to remove a dog by: \n";
+    cout << endl;
+    cout << "1. Its ID\t 2. Its position in the list (index)\n";
+    cout << endl;
+    cout << "Enter an option: ";
+    cin >> choice;
+    cout << endl;
+
+    switch (choice)
+    {
+    case 1:removeDogByIdMenu(dogs, dogCount); break;
+    case 2:removeDogByIndexMenu(dogs, dogCount); break;
+    }
+}
+
+
 void showDog(DOG* dogs, int i, string gender, string condition)
 {
     cout << "Name: " << dogs[i].name << endl;
@@ -279,10 +338,10 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
     int choice;
 
     cout << endl;
-    cout << "We rescued a new dog (add new dog to the registry:" << endl;
+    cout << "We rescued a new dog (add new dog to the registry):" << endl;
     cout << "1. Add to the end of the list" << endl;
-    cout << "2. Add to a specific position on the list)" << endl;
-    cout << "3. An dog got adopted (remove dog from the list of current dogs and add to the adopted dogs list)" << endl;
+    cout << "2. Add to a specific position on the list" << endl;
+    cout << "3. A dog got adopted (remove dog from the list of current dogs and add to the adopted dogs list)" << endl;
     cout << "4. Update an dog's profile" << endl;
     cout << "5. Show all dogs in the shelter" << endl;
     cout << "6. Show all dogs that have been adopted" << endl;
@@ -303,8 +362,8 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
     {
     case 1:addDogMenu(dogs, dogCount); break;
     case 2:insertDogMenu(dogs, dogCount); break;
+    case 3:removeDogMenu(dogs, dogCount); break;
         /*
-    case 3:removeDog(); break;
     case 4:updateDog(); break;*/
     case 5:showDogsInShelter(dogs, dogCount); break;
     case 6:showAdoptedDogs(adoptedDogs, adoptedDogCount); break;
@@ -318,7 +377,7 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
 int main()
 {
     bool continueMenu = true;
-    int dogCount = 5;
+    int dogCount = 6;
     int adoptedDogCount = 1;
 
     DOG dogs[200] = {
@@ -334,7 +393,10 @@ int main()
         {"Sara", 13, "Golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}}
     };
 
-    cout << "Hello! We are team ARTEMISSION and welcome to our program! \nHow may we assist you today?" << endl;
+    cout << "Hello! We are team ARTEMISSION" << endl;
+    cout << endl;
+    cout << endl;
+    cout << "Welcome to our program!\nHow may we assist you today?" << endl;
 
     do {
         mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount);
