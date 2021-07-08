@@ -28,6 +28,7 @@ struct DOG
     condition condition;
     DATE dateOfArrival;
     DATE dateOfAdoption;
+
 };
 
 string genderEnumToString(DOG* dogs, int i)
@@ -177,26 +178,37 @@ void removeDog(DOG* dogs, int& dogCount, int index)
     dogCount--;
 }
 
-void removeDogByIdMenu(DOG* dogs, int& dogCount)
+void removeDogByIdMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
 {
     int id, index;
     cout << "Enter dog's ID: ";
     cin >> id;
 
     index = getIndexById(dogs, dogCount, id);
+
+    cout << "\nEnter date of adoption (D/M/Y): ";
+    cin >> dogs[index].dateOfAdoption.day >> dogs[index].dateOfAdoption.month >> dogs[index].dateOfAdoption.year;
+
+    addDog(adoptedDogs, adoptedDogCount, dogs[index]);
     removeDog(dogs, dogCount, index);
+
 }
 
-void removeDogByIndexMenu(DOG* dogs, int& dogCount)
+void removeDogByIndexMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
 {
     int index;
     cout << "Enter dog's position (index): ";
     cin >> index;
 
+    cout << "\nEnter date of adoption (D/M/Y): ";
+    cin >> dogs[index].dateOfAdoption.day >> dogs[index].dateOfAdoption.month >> dogs[index].dateOfAdoption.year;
+
+    addDog(adoptedDogs, adoptedDogCount, dogs[index]);
     removeDog(dogs, dogCount, index);
+
 }
 
-void removeDogMenu(DOG* dogs, int& dogCount)
+void removeDogMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
 {
     int choice;
     cout << "Do you want to remove a dog by: \n";
@@ -209,11 +221,124 @@ void removeDogMenu(DOG* dogs, int& dogCount)
 
     switch (choice)
     {
-    case 1:removeDogByIdMenu(dogs, dogCount); break;
-    case 2:removeDogByIndexMenu(dogs, dogCount); break;
+    case 1:removeDogByIdMenu(dogs, dogCount, adoptedDogs, adoptedDogCount); break;
+    case 2:removeDogByIndexMenu(dogs, dogCount, adoptedDogs, adoptedDogCount); break;
+    }
+
+    cout << "\nThe dog will be now added to the list of adopted dogs";
+    cout << endl;
+}
+
+//the new code goes here
+
+
+void editName(DOG* dogs, int index)
+{
+    string newName;
+    cout << "Enter a new name: ";
+    cin >> newName;
+    dogs[index].name = newName;
+}
+
+void editBreed(DOG* dogs, int index)
+{
+    string newBreed;
+    cout << "Enter new breed: ";
+    cin >> newBreed;
+    dogs[index].breed = newBreed;
+}
+
+void editAge(DOG* dogs, int index)
+{
+    int newAge;
+    cout << "Enter new age: ";
+    cin >> newAge;
+    dogs[index].age = newAge;
+}
+
+void editGender(DOG* dogs, int index)
+{
+    string newGender;
+    cout << "Enter new gender (male/female): ";
+    cin >> newGender;
+    genderStringToEnum(dogs, newGender, index);
+}
+
+void editCondition(DOG* dogs, int index)
+{
+    string newCondition;
+    cout << "Enter new condition (good/bad): ";
+    cin >> newCondition;
+    conditionStringToEnum(dogs, newCondition, index);
+}
+
+void editDateOfArrival(DOG* dogs, int index)
+{
+    int newDay, newMonth, newYear;
+    cout << "Enter new date of arrival (D/M/Y): ";
+    cin >> newDay >> newMonth >> newYear;
+    dogs[index].dateOfArrival.day = newDay;
+    dogs[index].dateOfArrival.month = newMonth;
+    dogs[index].dateOfArrival.year = newYear;
+}
+
+void selectEdit(DOG* dogs, int index)
+{
+    int choice;
+    cout << "\n What do you want to edit? \n";
+    cout << "\n1. Name";
+    cout << "\n2. Breed";
+    cout << "\n3. Age";
+    cout << "\n4. Gender";
+    cout << "\n5. Condition";
+    cout << "\n6. Date of arrival \n";
+    cout << "\nEnter an option: ";
+    cin >> choice;
+
+    switch (choice)
+    {
+    case 1:editName(dogs, index); break;
+    case 2:editBreed(dogs, index); break;
+    case 3:editAge(dogs, index); break;
+    case 4:editGender(dogs, index); break;
+    case 5:editCondition(dogs, index); break;
+    case 6:editDateOfArrival(dogs, index); break;
     }
 }
 
+void editDogByIdMenu(DOG* dogs, int dogCount)
+{
+    int id, index;
+    cout << "Enter dog's ID: ";
+    cin >> id;
+
+    index = getIndexById(dogs, dogCount, id);
+    selectEdit(dogs, index);
+}
+
+void editDogByIndexMenu(DOG* dogs)
+{
+    int index;
+    cout << "Enter dog's position (index): ";
+    cin >> index;
+    selectEdit(dogs, index);
+}
+
+void editDogMenu(DOG* dogs, int dogCount)
+{
+    int choice;
+    cout << "Do you want to select an dog by: \n";
+    cout << "1. Its ID\t 2. Its position on the list (index)\n" << endl;
+    cout << "Enter an option: ";
+    cin >> choice;
+    cout << endl;
+
+    switch (choice)
+    {
+    case 1:editDogByIdMenu(dogs, dogCount); break;
+    case 2:editDogByIndexMenu(dogs); break;
+    }
+}
 
 void showDog(DOG* dogs, int i, string gender, string condition)
 {
@@ -362,9 +487,8 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
     {
     case 1:addDogMenu(dogs, dogCount); break;
     case 2:insertDogMenu(dogs, dogCount); break;
-    case 3:removeDogMenu(dogs, dogCount); break;
-        /*
-    case 4:updateDog(); break;*/
+    case 3:removeDogMenu(dogs, dogCount, adoptedDogs, adoptedDogCount); break;
+    case 4:editDogMenu(dogs, dogCount); break;
     case 5:showDogsInShelter(dogs, dogCount); break;
     case 6:showAdoptedDogs(adoptedDogs, adoptedDogCount); break;
     case 7:showByIdMenu(dogs, dogCount); break;
