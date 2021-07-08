@@ -2,12 +2,13 @@
 #include <string>
 using namespace std;
 
-enum gender {
-    MALE, FEMALE
-};
 enum condition
 {
     GOOD, BAD
+};
+
+enum gender {
+    MALE, FEMALE
 };
 
 struct DATE
@@ -28,7 +29,6 @@ struct DOG
     DATE dateOfArrival;
     DATE dateOfAdoption;
 };
-
 
 string genderEnumToString(DOG* dogs, int i)
 {
@@ -58,6 +58,26 @@ string conditionEnumToString(DOG* dogs, int i)
     }
     return condition;
 }
+
+void fillInToInsertDog(DOG& newDog, string& gender, string& condition)
+{
+    cout << "Fill in the information about the dog" << endl;
+    cout << endl;
+    cout << "Name: ";
+    cin >> newDog.name;
+    cout << "Breed: ";
+    cin >> newDog.breed;
+    cin.ignore();
+    cout << "Age (Years): ";
+    cin >> newDog.age;
+    cout << "Gender (male/female): ";
+    cin >> gender;
+    cout << "Condition (good/bad): ";
+    cin >> condition;
+    cout << "Date of arrival (D/M/Y): ";
+    cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
+}
+
 
 void genderStringToEnum(DOG* dogs, string gender, int i)
 {
@@ -92,31 +112,48 @@ void addDog(DOG* dogs, int& dogCount, DOG newDog)
     dogCount++;
 }
 
+
 void addDogMenu(DOG* dogs, int& dogCount)
 {
     string gender, condition;
-
     DOG newDog;
-    cout << "Fill in the information about the dog" << endl;
-    cout << endl;
-    cout << "Name: ";
-    cin >> newDog.name;
-    cout << "Breed: ";
-    cin >> newDog.breed;
-    cin.ignore();
-    cout << "Age (Years): ";
-    cin >> newDog.age;
-    cout << "Gender (male/female): ";
-    cin >> gender;
-    cout << "Condition (good/bad): ";
-    cin >> condition;
-    cout << "Date of arrival (D/M/Y): ";
-    cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
-
+    fillInToInsertDog(newDog, gender, condition);
     addDog(dogs, dogCount, newDog);
 
     genderStringToEnum(dogs, gender, (dogCount - 1));
-    conditionStringToEnum(dogs, condition, (dogCount - 1));
+    conditionStringToEnum(dogs, condition, dogCount - 1);
+}
+
+void insertDog(DOG* dogs, int& dogCount, DOG newDog, int index)
+{
+    for (int i = dogCount; i > index; i--)
+    {
+        dogs[i] = dogs[i - 1];
+    }
+    dogs[index] = newDog;
+    dogs[index].id = dogCount + 1;
+    dogCount++;
+}
+
+void insertDogMenu(DOG* dogs, int& dogCount)
+{
+    int index;
+    string gender, condition;
+
+    DOG newDog;
+
+    fillInToInsertDog(newDog, gender, condition);
+
+    cout << endl;
+    cout << "Enter the position where you want to place the dog: ";
+    cin >> index;
+
+    insertDog(dogs, dogCount, newDog, index);
+
+    /* NOT NECCESSERY?!?
+      genderStringToEnum(dogs, gender, index);
+      conditionStringToEnum(dogs, condition, index);
+      */
 }
 
 void showDog(DOG* dogs, int i, string gender, string condition)
@@ -265,10 +302,10 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
     switch (choice)
     {
     case 1:addDogMenu(dogs, dogCount); break;
+    case 2:insertDogMenu(dogs, dogCount); break;
         /*
-        case 2:insertDog(); break;
-        case 3:removeDog(); break;
-        case 4:updateDog(); break;*/
+    case 3:removeDog(); break;
+    case 4:updateDog(); break;*/
     case 5:showDogsInShelter(dogs, dogCount); break;
     case 6:showAdoptedDogs(adoptedDogs, adoptedDogCount); break;
     case 7:showByIdMenu(dogs, dogCount); break;
@@ -289,7 +326,8 @@ int main()
         {"Maya", 2, "Labrador", 1, gender::FEMALE, condition::GOOD, {18, 4, 2021}},
         {"Corny", 3, "French bulldog", 3, gender::MALE, condition::BAD, {03, 7, 2021}},
         {"Zeus", 4, "Golden retriever", 10, gender::MALE, condition::GOOD, {22, 9, 2020}},
-        {"Lilly", 5, "Pomeranian", 1, gender::FEMALE, condition::GOOD, {01, 4 , 2021}}
+        {"Lilly", 5, "Pomeranian", 1, gender::FEMALE, condition::GOOD, {01, 4 , 2021}},
+        {"Steve", 6, "Pug", 3, gender::MALE, condition::GOOD, {02, 2, 2021}}
     };
 
     DOG adoptedDogs[200] = {
