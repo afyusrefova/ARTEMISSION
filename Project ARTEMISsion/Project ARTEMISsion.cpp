@@ -4,7 +4,13 @@ using namespace std;
 
 #define RESET   "\033[0m"
 #define RED     "\033[1;91m" 
-
+#define YELLOW  "\033[1;93m"  
+#define GREEN   "\033[1;92m"
+#define BLUE    "\033[0;36m"
+#define CYAN    "\033[1;96m"
+#define PURPLE  "\033[1;95m"
+#define GRAY    "\033[1;90m" 
+#define WHITE   "\033[4;37m"
 
 enum condition
 {
@@ -34,6 +40,23 @@ struct DOG
     DATE dateOfAdoption;
 
 };
+
+int checkIfUserDataIsValid()
+{
+    int value;
+    bool validInput = false;
+    do {
+        cin >> value;
+        if (!(validInput = cin.good())) {
+            cout << "Incorrect input, please enter a number from 1 to 10" << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            return -1;
+        }
+
+    } while (!validInput);
+    return value;
+}
 
 string genderEnumToString(DOG* dogs, int i)
 {
@@ -393,6 +416,8 @@ void showDog(DOG* dogs, int i, string gender, string condition)
     cout << "Date of arrival: " << dogs[i].dateOfArrival.day << "/" << dogs[i].dateOfArrival.month << "/" << dogs[i].dateOfArrival.year << endl;
 }
 
+
+
 void printAdoptedDogs(DOG* adoptedDogs, int i, string gender, string condition)
 {
     cout << "Name: " << adoptedDogs[i].name << endl;
@@ -433,12 +458,24 @@ void showAdoptedDogs(DOG* adoptedDogs, int adoptedDogCount)
     cout << endl;
 }
 
-// hereeeeeeeeeeeeee
-//hereee
-//here
-//here
 
-void showByBreed(DOG* dogs, int dogCount, string breedUser)
+int SelectBetweenTwo() {
+    int choice;
+
+    cout << "Which do you want to see \n";
+    cout << "1. Dogs in the shelter \t 2. Adopted dogs\n";
+    cout << "\nEnter an option: ";
+    cin >> choice;
+
+    while (choice != 1 and choice != 2) {
+        cout << "You have entered an incorrect option. Please enter either 1 or 2: ";
+        cin >> choice;
+        cout << endl;
+    }
+    return choice;
+}
+
+void showByBreed(DOG* dogs, int dogCount, string breedUser, int selected_array)
 {
     string gender, condition;
 
@@ -448,26 +485,34 @@ void showByBreed(DOG* dogs, int dogCount, string breedUser)
         condition = conditionEnumToString(dogs, i);
         if (dogs[i].breed == breedUser)
         {
-            showDog(dogs, i, gender, condition);
+            if (selected_array == 1)
+                showDog(dogs, i, gender, condition);
+            else
+                printAdoptedDogs(dogs, i, gender, condition);
+            cout << endl;
         }
     }
     cout << endl;
+
 }
 
-void showByBreedMenu(DOG* dogs, int dogCount)
+void showByBreedMenu(DOG* dogs, int dogCount, DOG* adoptedDogs, int adoptedDogCount)
 {
     string breedUser;
+    int selected_array = SelectBetweenTwo();
     cout << "Enter breed: ";
     cin >> breedUser;
     cout << endl;
 
-
-    showByBreed(dogs, dogCount, breedUser);
-
+    if (selected_array == 1)
+        showByBreed(dogs, dogCount, breedUser, selected_array);
+    else
+        showByBreed(adoptedDogs, adoptedDogCount, breedUser, selected_array);
 }
 
-void showById(DOG* dogs, int dogCount, int IdUser)
+void showById(DOG* dogs, int dogCount, int IdUser, int selected_array)
 {
+
     string gender, condition;
 
     for (int i = 0; i < dogCount; i++)
@@ -476,19 +521,28 @@ void showById(DOG* dogs, int dogCount, int IdUser)
         condition = conditionEnumToString(dogs, i);
         if (dogs[i].id == IdUser)
         {
-            showDog(dogs, i, gender, condition);
+            if (selected_array == 1)
+                showDog(dogs, i, gender, condition);
+            else
+                printAdoptedDogs(dogs, i, gender, condition);
         }
     }
     cout << endl;
+
 }
 
-void showByIdMenu(DOG* dogs, int dogCount)
+void showByIdMenu(DOG* dogs, int dogCount, DOG* adoptedDogs, int adoptedDogCount)
 {
     int IdUser;
+    int selected_array = SelectBetweenTwo();
     cout << "Enter ID: ";
     cin >> IdUser;
     cout << endl;
-    showById(dogs, dogCount, IdUser);
+    if (selected_array == 1)
+        showById(dogs, dogCount, IdUser, selected_array);
+    else
+        showById(adoptedDogs, adoptedDogCount, IdUser, selected_array);
+
 }
 
 void showBadConditionDogs(DOG* dogs, int dogCount)
@@ -510,7 +564,7 @@ void showBadConditionDogs(DOG* dogs, int dogCount)
 
 void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, int maxSize)
 {
-    int choice;
+
 
     cout << endl;
     cout << "We rescued a new dog (add new dog to the registry):" << endl;
@@ -521,7 +575,7 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
     cout << "5. Show all dogs in the shelter" << endl;
     cout << "6. Show all dogs that have been adopted" << endl;
     cout << "7. Show dog by ID number" << endl;
-    cout << "8. Show all dogs of specific species" << endl;
+    cout << "8. Show all dogs of specific breed" << endl;
     cout << "9. Show all dogs that need medical treatment" << endl;
     cout << "10. EXIT" << endl;
 
@@ -529,18 +583,10 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
 
     cout << "Choose an option: ";
 
-    cin >> choice;
 
-    cout << endl;
 
-    while (choice < 1 or choice>10) {
-        cout << "You have entered an incorrect option. Please enter a valid number(between 1 and 10): ";
-        cin >> choice;
-        cout << endl;
-    }
-    cout << endl;
 
-    switch (choice)
+    switch (checkIfUserDataIsValid())
     {
     case 1:addDogMenu(dogs, dogCount); break;
     case 2:insertDogMenu(dogs, dogCount, maxSize); break;
@@ -548,10 +594,14 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
     case 4:editDogMenu(dogs, dogCount); break;
     case 5:showDogsInShelter(dogs, dogCount); break;
     case 6:showAdoptedDogs(adoptedDogs, adoptedDogCount); break;
-    case 7:showByIdMenu(dogs, dogCount); break;
-    case 8:showByBreedMenu(dogs, dogCount); break;
+    case 7:showByIdMenu(dogs, dogCount, adoptedDogs, adoptedDogCount); break;
+    case 8:showByBreedMenu(dogs, dogCount, adoptedDogs, adoptedDogCount); break;
     case 9:showBadConditionDogs(dogs, dogCount); break;
     case 10: exit(0); break;
+    case -1:  mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount, maxSize); break;
+    default: cout << "Incorrect input, please enter a number from 1 to 10" << endl;
+        mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount, maxSize);
+        break;
     }
 }
 
@@ -563,16 +613,16 @@ int main()
     int maxSize = 80;
 
     DOG dogs[200] = {
-        {"Bark", 1, "Husky", 2,gender::MALE,condition::GOOD,{22, 3, 2021}},
-        {"Maya", 2, "Labrador", 1, gender::FEMALE, condition::GOOD, {18, 4, 2021}},
-        {"Corny", 3, "French bulldog", 3, gender::MALE, condition::BAD, {03, 7, 2021}},
-        {"Zeus", 4, "Golden retriever", 10, gender::MALE, condition::GOOD, {22, 9, 2020}},
-        {"Lilly", 5, "Pomeranian", 1, gender::FEMALE, condition::GOOD, {01, 4 , 2021}},
-        {"Steve", 6, "Pug", 3, gender::MALE, condition::GOOD, {02, 2, 2021}}
+        {"Bark", 1, "husky", 2,gender::MALE,condition::GOOD,{22, 3, 2021}},
+        {"Maya", 2, "labrador", 1, gender::FEMALE, condition::GOOD, {18, 4, 2021}},
+        {"Corny", 3, "french bulldog", 3, gender::MALE, condition::BAD, {03, 7, 2021}},
+        {"Zeus", 4, "golden retriever", 10, gender::MALE, condition::GOOD, {22, 9, 2020}},
+        {"Lilly", 5, "pomeranian", 1, gender::FEMALE, condition::GOOD, {01, 4 , 2021}},
+        {"Steve", 6, "pug", 3, gender::MALE, condition::GOOD, {02, 2, 2021}}
     };
 
     DOG adoptedDogs[200] = {
-        {"Sara", 13, "Golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}}
+        {"Sara", 13, "golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}}
     };
 
     cout << "Hello! We are team ARTEMISSION" << endl;
