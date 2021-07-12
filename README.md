@@ -32,6 +32,6 @@ Download the program from [github] https://github.com/afyusrefova/ARTEMISsion by
  The program is created using C++
  ## Source
  
- All photos in the project are taken from internet except the logo
+ All photos in the project are taken from internet except the logo.
  
  ---
