@@ -102,7 +102,9 @@ void fillInToInsertDog(DOG& newDog, string& gender, string& condition)
     cin >> gender;
     cout << "Condition (good/bad): ";
     cin >> condition;
-    cout << "Date of arrival (D/M/Y): ";
+    cout << "Date of arrival (D M Y) " << endl;
+    cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
+    cout << "Enter here: ";
     cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
 }
 
@@ -223,7 +225,9 @@ void removeDogByIdMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedD
 
     }
     else {
-        cout << "\nEnter date of adoption (D/M/Y): ";
+        cout << "\nEnter date of adoption (D M Y)" << endl;
+        cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
+        cout << "Enter here: ";
         cin >> dogs[index].dateOfAdoption.day >> dogs[index].dateOfAdoption.month >> dogs[index].dateOfAdoption.year;
         addDog(adoptedDogs, adoptedDogCount, dogs[index]);
         removeDog(dogs, dogCount, index);
@@ -245,7 +249,9 @@ void removeDogByIndexMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adopt
     }
     else
     {
-        cout << "\nEnter date of adoption (D/M/Y): ";
+        cout << "\nEnter date of adoption (D M Y) " << endl;
+        cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
+        cout << "Enter here: ";
         cin >> dogs[index].dateOfAdoption.day >> dogs[index].dateOfAdoption.month >> dogs[index].dateOfAdoption.year;
 
         addDog(adoptedDogs, adoptedDogCount, dogs[index]);
@@ -325,7 +331,9 @@ void editCondition(DOG* dogs, int index)
 void editDateOfArrival(DOG* dogs, int index)
 {
     int newDay, newMonth, newYear;
-    cout << "Enter new date of arrival (D/M/Y): ";
+    cout << "Enter new date of arrival (D M Y) " << endl;
+    cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
+    cout << "Enter here: ";
     cin >> newDay >> newMonth >> newYear;
     dogs[index].dateOfArrival.day = newDay;
     dogs[index].dateOfArrival.month = newMonth;
@@ -341,7 +349,8 @@ void selectEdit(DOG* dogs, int index)
     cout << "\n3. Age";
     cout << "\n4. Gender";
     cout << "\n5. Condition";
-    cout << "\n6. Date of arrival \n";
+    cout << "\n6. Date of arrival (D/M/Y) \n";
+    
     cout << "\nEnter an option: ";
     cin >> choice;
 
@@ -350,6 +359,7 @@ void selectEdit(DOG* dogs, int index)
         cin >> choice;
         cout << endl;
     }
+    cout << endl;
     cout << endl;
 
     switch (choice)
@@ -413,7 +423,7 @@ void showDog(DOG* dogs, int i, string gender, string condition)
     cout << "Age (in human years): " << dogs[i].age << endl;
     cout << "Gender: " << gender << endl;
     cout << "Condition: " << condition << endl;
-    cout << "Date of arrival: " << dogs[i].dateOfArrival.day << "/" << dogs[i].dateOfArrival.month << "/" << dogs[i].dateOfArrival.year << endl;
+    cout << "Date of arrival (D/M/Y): " << dogs[i].dateOfArrival.day << "/" << dogs[i].dateOfArrival.month << "/" << dogs[i].dateOfArrival.year << endl;
 }
 
 
@@ -570,12 +580,13 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
     cout << "We rescued a new dog (add new dog to the registry):" << endl;
     cout << "1. Add to the end of the list" << endl;
     cout << "2. Add to a specific position on the list" << endl;
-    cout << "3. A dog got adopted (remove dog from the list of current dogs and add to the adopted dogs list)" << endl;
-    cout << "4. Update an dog's profile" << endl;
+    cout << "3. A dog got adopted" << endl;
+    //3. (remove dog from the list of current dogs and add to the adopted dogs list)
+    cout << "4. Update a dog's profile" << endl;
     cout << "5. Show all dogs in the shelter" << endl;
     cout << "6. Show all dogs that have been adopted" << endl;
-    cout << "7. Show dog by ID number" << endl;
-    cout << "8. Show all dogs of specific breed" << endl;
+    cout << "7. Show a dog by ID number" << endl;
+    cout << "8. Show all dogs of specific breed(small caps)" << endl;
     cout << "9. Show all dogs that need medical treatment" << endl;
     cout << "10. EXIT" << endl;
 
