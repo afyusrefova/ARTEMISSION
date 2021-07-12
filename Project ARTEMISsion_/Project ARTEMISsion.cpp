@@ -510,7 +510,7 @@ void showByBreedMenu(DOG* dogs, int dogCount, DOG* adoptedDogs, int adoptedDogCo
 {
     string breedUser;
     int selected_array = SelectBetweenTwo();
-    cout << "Enter breed: ";
+    cout << "Enter breed(small caps): ";
     cin >> breedUser;
     cout << endl;
 
@@ -585,7 +585,7 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
     cout << "5. Show all dogs in the shelter" << endl;
     cout << "6. Show all dogs that have been adopted" << endl;
     cout << "7. Show a dog by ID number" << endl;
-    cout << "8. Show all dogs of specific breed(small caps)" << endl;
+    cout << "8. Show all dogs of specific breed" << endl;
     cout << "9. Show all dogs that need medical treatment" << endl;
     cout << "10. EXIT" << endl;
 
