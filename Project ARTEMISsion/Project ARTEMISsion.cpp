@@ -575,11 +575,10 @@ void showBadConditionDogs(DOG* dogs, int dogCount)
 void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, int maxSize)
 {
 
-
     cout << endl;
-    cout << "We rescued a new dog (add new dog to the registry):" << endl;
-    cout << "1. Add to the end of the list" << endl;
-    cout << "2. Add to a specific position on the list" << endl;
+   //cout << "We rescued a new dog (add new dog to the registry):" << endl;
+    cout << "1. Add a dog to the end of the list" << endl;
+    cout << "2. Add a dog to a specific position on the list" << endl;
     cout << "3. A dog got adopted" << endl;
     //3. (remove dog from the list of current dogs and add to the adopted dogs list)
     cout << "4. Update a dog's profile" << endl;
@@ -636,7 +635,12 @@ int main()
         {"Sara", 13, "golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}}
     };
 
-    cout << "Hello! We are team ARTEMISSION" << endl;
+    cout << "Hello! We are team " << endl;
+    cout << "    _      ____    _____   _____   __  __   ___   ____    ____    ___    ___    _   _" << endl;
+    cout << "   / \\    |  _ \\  |_   _| | ____| |  \\/  | |_ _| / ___|  / ___|  |_ _|  / _ \\  | \\ | |" << endl;
+    cout << "  / _ \\   | |_) |   | |   |  _|   | |\\/| |  | |  \\___ \\  \\___ \\   | |  | | | | |  \\| |" << endl;
+    cout << " / ___ \\  |  _ <    | |   | |___  | |  | |  | |   ___) |  ___) |  | |  | |_| | | |\\  |" << endl;
+    cout << "/_/   \\_\\ |_| \\_\\   |_|   |_____| |_|  |_| |___| |____/  |____/  |___|  \\___/  |_| \\_|" << endl;
     cout << endl;
     cout << endl;
     cout << "Welcome to our program!\nHow may we assist you today?" << endl;
