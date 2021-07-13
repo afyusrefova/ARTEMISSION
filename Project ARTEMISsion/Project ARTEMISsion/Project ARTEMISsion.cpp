@@ -58,6 +58,20 @@ int checkIfUserDataIsValid()
     return value;
 }
 
+int cinInt() {
+    int number;
+
+    while (!(cin >> number)) {
+
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+        cout << endl;
+        cout << RED << "You have to enter a number. Please, try again: " << RESET;
+    }
+
+    return number;
+}
+
 string genderEnumToString(DOG* dogs, int i)
 {
     string gender;
@@ -94,6 +108,7 @@ void fillInToInsertDog(DOG& newDog, string& gender, string& condition)
     cout << "Name: ";
     cin >> newDog.name;
     cout << "Breed: ";
+    //getline(cin, newDog.breed);
     cin >> newDog.breed;
     cin.ignore();
     cout << "Age (Years): ";
@@ -270,14 +285,13 @@ void removeDogMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCo
     cout << "Enter an option: ";
     cin >> choice;
     cout << endl;
-
+    
     while (choice != 1 && choice != 2)
     {
         cout << RED << "You have entered an incorrection option. Please enter 1 or 2: ";
         cin >> choice;
         cout << endl;
     };
-
     switch (choice)
     {
     case 1:removeDogByIdMenu(dogs, dogCount, adoptedDogs, adoptedDogCount); break;
@@ -399,7 +413,7 @@ void editDogMenu(DOG* dogs, int dogCount)
     cout << "Enter an option: ";
     cin >> choice;
     cout << endl;
-
+   
     while (choice != 1 && choice != 2)
     {
         cout << RED << "You have entered an incorrection option. Please enter 1 or 2: ";
@@ -464,6 +478,7 @@ void showAdoptedDogs(DOG* adoptedDogs, int adoptedDogCount)
         gender = genderEnumToString(adoptedDogs, i);
         condition = conditionEnumToString(adoptedDogs, i);
         printAdoptedDogs(adoptedDogs, i, gender, condition);
+        cout << endl;
     }
     cout << endl;
 }
@@ -593,9 +608,6 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
 
     cout << "Choose an option: ";
 
-
-
-
     switch (checkIfUserDataIsValid())
     {
     case 1:addDogMenu(dogs, dogCount); break;
@@ -609,7 +621,7 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
     case 9:showBadConditionDogs(dogs, dogCount); break;
     case 10: exit(0); break;
     case -1:  mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount, maxSize); break;
-    default: cout << "Incorrect input, please enter a number from 1 to 10" << endl;
+    default: cout << "Incorrect input" << endl;
         mainMenu(dogs, dogCount, adoptedDogs, adoptedDogCount, maxSize);
         break;
     }
@@ -618,8 +630,8 @@ void mainMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount, 
 int main()
 {
     bool continueMenu = true;
-    int dogCount = 6;
-    int adoptedDogCount = 1;
+    int dogCount = 7;
+    int adoptedDogCount = 7;
     int maxSize = 80;
 
     DOG dogs[200] = {
@@ -628,19 +640,26 @@ int main()
         {"Corny", 3, "french bulldog", 3, gender::MALE, condition::BAD, {03, 7, 2021}},
         {"Zeus", 4, "golden retriever", 10, gender::MALE, condition::GOOD, {22, 9, 2020}},
         {"Lilly", 5, "pomeranian", 1, gender::FEMALE, condition::GOOD, {01, 4 , 2021}},
-        {"Steve", 6, "pug", 3, gender::MALE, condition::GOOD, {02, 2, 2021}}
+        {"Steve", 6, "pug", 3, gender::MALE, condition::GOOD, {02, 2, 2021}},
+        {"Odysseus", 7, "labradoodle", 5, gender::MALE, condition::GOOD, {3, 4, 2021}}
     };
 
     DOG adoptedDogs[200] = {
-        {"Sara", 13, "golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}}
+        {"Sara", 8, "golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}, {12, 6, 2016}},
+        {"Meme", 9, "pug", 4, gender::MALE, condition::GOOD, {3, 2, 2020}, {30, 4, 2021}},
+        {"Sasha", 10, "pomeranian", 0.5, gender::FEMALE, condition::GOOD, {8, 7, 2020}, {10, 9, 2020}},
+        {"Hector", 11, "bulldog", 7, gender::MALE, condition::GOOD, {4, 2, 2021}, {30, 4, 2020}},
+        {"Aphrodite", 12, "shin tzu", 4, gender::FEMALE, condition::GOOD, {6, 9, 2020}, {2, 7, 2021}},
+        {"Jason", 13, "shiba inu", 2, gender::MALE, condition::GOOD, {1, 1, 2020}, {2, 4, 2020}},
+        {"Perseus", 14, "toy poodle", 0.5, gender::MALE, condition::GOOD, {7, 7, 2021}, {15, 7, 2021}}
     };
 
     cout << "Hello! We are team " << endl;
-    cout << "    _      ____    _____   _____   __  __   ___   ____    ____    ___    ___    _   _" << endl;
+    cout <<YELLOW<< "    _      ____    _____   _____   __  __   ___   ____    ____    ___    ___    _   _" << endl;
     cout << "   / \\    |  _ \\  |_   _| | ____| |  \\/  | |_ _| / ___|  / ___|  |_ _|  / _ \\  | \\ | |" << endl;
     cout << "  / _ \\   | |_) |   | |   |  _|   | |\\/| |  | |  \\___ \\  \\___ \\   | |  | | | | |  \\| |" << endl;
     cout << " / ___ \\  |  _ <    | |   | |___  | |  | |  | |   ___) |  ___) |  | |  | |_| | | |\\  |" << endl;
-    cout << "/_/   \\_\\ |_| \\_\\   |_|   |_____| |_|  |_| |___| |____/  |____/  |___|  \\___/  |_| \\_|" << endl;
+    cout << "/_/   \\_\\ |_| \\_\\   |_|   |_____| |_|  |_| |___| |____/  |____/  |___|  \\___/  |_| \\_|" << RESET<<endl;
     cout << endl;
     cout << endl;
     cout << "Welcome to our program!\nHow may we assist you today?" << endl;
