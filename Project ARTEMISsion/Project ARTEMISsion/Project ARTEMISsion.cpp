@@ -48,7 +48,7 @@ int checkIfUserDataIsValid()
     do {
         cin >> value;
         if (!(validInput = cin.good())) {
-            cout << "Incorrect input, please enter a number from 1 to 10" << endl;
+            cout <<RED<< "Incorrect input, please enter a number from 1 to 10" <<RESET<< endl;
             cin.clear();
             cin.ignore(INT_MAX, '\n');
             return -1;
@@ -288,7 +288,7 @@ void removeDogMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCo
     
     while (choice != 1 && choice != 2)
     {
-        cout << RED << "You have entered an incorrection option. Please enter 1 or 2: ";
+        cout << RED << "You have entered an incorrection option. Please enter 1 or 2: " << RESET;
         cin >> choice;
         cout << endl;
     };
@@ -436,7 +436,18 @@ void showDog(DOG* dogs, int i, string gender, string condition)
     cout << "Breed: " << dogs[i].breed << endl;
     cout << "Age (in human years): " << dogs[i].age << endl;
     cout << "Gender: " << gender << endl;
-    cout << "Condition: " << condition << endl;
+    cout << "Condition: ";
+    gender = genderEnumToString(dogs, i);
+    condition = conditionEnumToString(dogs, i);
+    
+    if (dogs[i].condition == 0)
+    {
+        cout << GREEN << condition <<RESET<< endl;
+    }
+    else {
+        cout << RED << condition << RESET << endl;
+    }
+
     cout << "Date of arrival (D/M/Y): " << dogs[i].dateOfArrival.day << "/" << dogs[i].dateOfArrival.month << "/" << dogs[i].dateOfArrival.year << endl;
 }
 
@@ -450,8 +461,8 @@ void printAdoptedDogs(DOG* adoptedDogs, int i, string gender, string condition)
     cout << "Age (in human years): " << adoptedDogs[i].age << endl;
     cout << "Gender: " << gender << endl;
     cout << "Condition: " << condition << endl;
-    cout << "Date of arrival: " << adoptedDogs[i].dateOfArrival.day << "/" << adoptedDogs[i].dateOfArrival.month << "/" << adoptedDogs[i].dateOfArrival.year << endl;
-    cout << "Date of adoption: " << adoptedDogs[i].dateOfAdoption.day << "/" << adoptedDogs[i].dateOfAdoption.month << "/" << adoptedDogs[i].dateOfAdoption.year << endl;
+    cout << YELLOW << "Date of arrival: " << adoptedDogs[i].dateOfArrival.day << "/" << adoptedDogs[i].dateOfArrival.month << "/" << adoptedDogs[i].dateOfArrival.year << RESET << endl;
+    cout << CYAN << "Date of adoption: " << adoptedDogs[i].dateOfAdoption.day << "/" << adoptedDogs[i].dateOfAdoption.month << "/" << adoptedDogs[i].dateOfAdoption.year << RESET << endl;
 }
 
 void showDogsInShelter(DOG* dogs, int dogCount)
@@ -635,12 +646,12 @@ int main()
     int maxSize = 80;
 
     DOG dogs[200] = {
-        {"Bark", 1, "husky", 2,gender::MALE,condition::GOOD,{22, 3, 2021}},
+        {"Bark", 1, "husky", 2,gender::MALE,condition::BAD,{22, 3, 2021}},
         {"Maya", 2, "labrador", 1, gender::FEMALE, condition::GOOD, {18, 4, 2021}},
         {"Corny", 3, "french bulldog", 3, gender::MALE, condition::BAD, {03, 7, 2021}},
         {"Zeus", 4, "golden retriever", 10, gender::MALE, condition::GOOD, {22, 9, 2020}},
         {"Lilly", 5, "pomeranian", 1, gender::FEMALE, condition::GOOD, {01, 4 , 2021}},
-        {"Steve", 6, "pug", 3, gender::MALE, condition::GOOD, {02, 2, 2021}},
+        {"Steve", 6, "pug", 3, gender::MALE, condition::BAD, {02, 2, 2021}},
         {"Odysseus", 7, "labradoodle", 5, gender::MALE, condition::GOOD, {3, 4, 2021}}
     };
 
