@@ -57,7 +57,7 @@ int checkIfUserDataIsValid()
     } while (!validInput);
     return value;
 }
-
+/* edit later
 int cinInt() {
     int number;
 
@@ -71,6 +71,8 @@ int cinInt() {
 
     return number;
 }
+*/
+
 
 string genderEnumToString(DOG* dogs, int i)
 {
@@ -247,9 +249,6 @@ void removeDogByIdMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedD
         addDog(adoptedDogs, adoptedDogCount, dogs[index]);
         removeDog(dogs, dogCount, index);
     }
-
-
-
 }
 
 void removeDogByIndexMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
@@ -272,7 +271,6 @@ void removeDogByIndexMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adopt
         addDog(adoptedDogs, adoptedDogCount, dogs[index]);
         removeDog(dogs, dogCount, index);
     }
-
 }
 
 void removeDogMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCount)
@@ -656,7 +654,7 @@ int main()
     };
 
     DOG adoptedDogs[200] = {
-        {"Sara", 8, "golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}, {12, 6, 2016}},
+        {"Sara", 8, "golden retriever", 1, gender::FEMALE, condition::GOOD, {1,3,2020}, {12, 6, 2021}},
         {"Meme", 9, "pug", 4, gender::MALE, condition::GOOD, {3, 2, 2020}, {30, 4, 2021}},
         {"Sasha", 10, "pomeranian", 0.5, gender::FEMALE, condition::GOOD, {8, 7, 2020}, {10, 9, 2020}},
         {"Hector", 11, "bulldog", 7, gender::MALE, condition::GOOD, {4, 2, 2021}, {30, 4, 2020}},
