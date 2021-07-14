@@ -1,3 +1,5 @@
+// artemission code.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
 #include <iostream>
 #include <string>
 using namespace std;
@@ -48,7 +50,7 @@ int checkIfUserDataIsValid()
     do {
         cin >> value;
         if (!(validInput = cin.good())) {
-            cout <<RED<< "Incorrect input, please enter a number from 1 to 10" <<RESET<< endl;
+            cout << RED << "Incorrect input, please enter a number from 1 to 10" << RESET << endl;
             cin.clear();
             cin.ignore(INT_MAX, '\n');
             return -1;
@@ -57,7 +59,7 @@ int checkIfUserDataIsValid()
     } while (!validInput);
     return value;
 }
-/* edit later
+
 int cinInt() {
     int number;
 
@@ -71,7 +73,7 @@ int cinInt() {
 
     return number;
 }
-*/
+
 
 
 string genderEnumToString(DOG* dogs, int i)
@@ -107,22 +109,30 @@ void fillInToInsertDog(DOG& newDog, string& gender, string& condition)
 {
     cout << "Fill in the information about the dog" << endl;
     cout << endl;
+
     cout << "Name: ";
     cin >> newDog.name;
+
     cout << "Breed: ";
-    //getline(cin, newDog.breed);
     cin >> newDog.breed;
     cin.ignore();
+
     cout << "Age (Years): ";
-    cin >> newDog.age;
+    newDog.age = cinInt();
+
     cout << "Gender (male/female): ";
     cin >> gender;
+
     cout << "Condition (good/bad): ";
     cin >> condition;
+
     cout << "Date of arrival (D M Y) " << endl;
     cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
     cout << "Enter here: ";
-    cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
+    newDog.dateOfArrival.day = cinInt();
+    newDog.dateOfArrival.month = cinInt();
+    newDog.dateOfArrival.year = cinInt();
+    //cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
 }
 
 
@@ -245,7 +255,10 @@ void removeDogByIdMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedD
         cout << "\nEnter date of adoption (D M Y)" << endl;
         cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
         cout << "Enter here: ";
-        cin >> dogs[index].dateOfAdoption.day >> dogs[index].dateOfAdoption.month >> dogs[index].dateOfAdoption.year;
+        dogs[index].dateOfAdoption.day = cinInt();
+        dogs[index].dateOfAdoption.month = cinInt();
+        dogs[index].dateOfAdoption.year = cinInt();
+        //cin >> dogs[index].dateOfAdoption.day >> dogs[index].dateOfAdoption.month >> dogs[index].dateOfAdoption.year;
         addDog(adoptedDogs, adoptedDogCount, dogs[index]);
         removeDog(dogs, dogCount, index);
     }
@@ -283,7 +296,7 @@ void removeDogMenu(DOG* dogs, int& dogCount, DOG* adoptedDogs, int& adoptedDogCo
     cout << "Enter an option: ";
     cin >> choice;
     cout << endl;
-    
+
     while (choice != 1 && choice != 2)
     {
         cout << RED << "You have entered an incorrection option. Please enter 1 or 2: " << RESET;
@@ -320,7 +333,7 @@ void editAge(DOG* dogs, int index)
 {
     int newAge;
     cout << "Enter new age: ";
-    cin >> newAge;
+    newAge = cinInt();
     dogs[index].age = newAge;
 }
 
@@ -346,7 +359,10 @@ void editDateOfArrival(DOG* dogs, int index)
     cout << "Enter new date of arrival (D M Y) " << endl;
     cout << GRAY << "NOTE: please enter the date number with a space between them " << RESET << endl;
     cout << "Enter here: ";
-    cin >> newDay >> newMonth >> newYear;
+    newDay = cinInt();
+    newMonth = cinInt();
+    newYear = cinInt();
+    //cin >> newDay >> newMonth >> newYear;
     dogs[index].dateOfArrival.day = newDay;
     dogs[index].dateOfArrival.month = newMonth;
     dogs[index].dateOfArrival.year = newYear;
@@ -389,7 +405,7 @@ void editDogByIdMenu(DOG* dogs, int dogCount)
 {
     int id, index;
     cout << "Enter dog's ID: ";
-    cin >> id;
+    id = cinInt();
 
     index = getIndexById(dogs, dogCount, id);
     selectEdit(dogs, index);
@@ -399,7 +415,8 @@ void editDogByIndexMenu(DOG* dogs)
 {
     int index;
     cout << "Enter dog's position (index): ";
-    cin >> index;
+    index = cinInt();
+
     selectEdit(dogs, index);
 }
 
@@ -411,7 +428,7 @@ void editDogMenu(DOG* dogs, int dogCount)
     cout << "Enter an option: ";
     cin >> choice;
     cout << endl;
-   
+
     while (choice != 1 && choice != 2)
     {
         cout << RED << "You have entered an incorrection option. Please enter 1 or 2: ";
@@ -437,10 +454,10 @@ void showDog(DOG* dogs, int i, string gender, string condition)
     cout << "Condition: ";
     gender = genderEnumToString(dogs, i);
     condition = conditionEnumToString(dogs, i);
-    
+
     if (dogs[i].condition == 0)
     {
-        cout << GREEN << condition <<RESET<< endl;
+        cout << GREEN << condition << RESET << endl;
     }
     else {
         cout << RED << condition << RESET << endl;
@@ -664,11 +681,11 @@ int main()
     };
 
     cout << "Hello! We are team " << endl;
-    cout <<YELLOW<< "    _      ____    _____   _____   __  __   ___   ____    ____    ___    ___    _   _" << endl;
+    cout << YELLOW << "    _      ____    _____   _____   __  __   ___   ____    ____    ___    ___    _   _" << endl;
     cout << "   / \\    |  _ \\  |_   _| | ____| |  \\/  | |_ _| / ___|  / ___|  |_ _|  / _ \\  | \\ | |" << endl;
     cout << "  / _ \\   | |_) |   | |   |  _|   | |\\/| |  | |  \\___ \\  \\___ \\   | |  | | | | |  \\| |" << endl;
     cout << " / ___ \\  |  _ <    | |   | |___  | |  | |  | |   ___) |  ___) |  | |  | |_| | | |\\  |" << endl;
-    cout << "/_/   \\_\\ |_| \\_\\   |_|   |_____| |_|  |_| |___| |____/  |____/  |___|  \\___/  |_| \\_|" << RESET<<endl;
+    cout << "/_/   \\_\\ |_| \\_\\   |_|   |_____| |_|  |_| |___| |____/  |____/  |___|  \\___/  |_| \\_|" << RESET << endl;
     cout << endl;
     cout << endl;
     cout << "Welcome to our program!\nHow may we assist you today?" << endl;
