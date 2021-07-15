@@ -1,5 +1,4 @@
-// artemission code.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -74,8 +73,6 @@ int cinInt() {
     return number;
 }
 
-
-
 string genderEnumToString(DOG* dogs, int i)
 {
     string gender;
@@ -135,7 +132,6 @@ void fillInToInsertDog(DOG& newDog, string& gender, string& condition)
     //cin >> newDog.dateOfArrival.day >> newDog.dateOfArrival.month >> newDog.dateOfArrival.year;
 }
 
-
 void genderStringToEnum(DOG* dogs, string gender, int i)
 {
     if (gender == "male")
@@ -168,7 +164,6 @@ void addDog(DOG* dogs, int& dogCount, DOG newDog)
     dogs[dogCount].id = dogCount + 1;
     dogCount++;
 }
-
 
 void addDogMenu(DOG* dogs, int& dogCount)
 {
@@ -466,8 +461,6 @@ void showDog(DOG* dogs, int i, string gender, string condition)
     cout << "Date of arrival (D/M/Y): " << dogs[i].dateOfArrival.day << "/" << dogs[i].dateOfArrival.month << "/" << dogs[i].dateOfArrival.year << endl;
 }
 
-
-
 void printAdoptedDogs(DOG* adoptedDogs, int i, string gender, string condition)
 {
     cout << "Name: " << adoptedDogs[i].name << endl;
@@ -508,7 +501,6 @@ void showAdoptedDogs(DOG* adoptedDogs, int adoptedDogCount)
     }
     cout << endl;
 }
-
 
 int SelectBetweenTwo() {
     int choice;
